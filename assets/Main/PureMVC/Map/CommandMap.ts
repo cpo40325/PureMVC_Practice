@@ -1,0 +1,5 @@
+
+export default {
+    TEST_BUTTON_CLICK: 'TEST_BUTTON_CLICK',
+    UPDATE_EXP: 'UPDATE_EXP'
+};

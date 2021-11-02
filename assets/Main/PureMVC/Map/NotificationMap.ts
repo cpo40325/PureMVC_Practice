@@ -1,0 +1,6 @@
+
+export default {
+    UPDATE_LABEL_NUM: 'UPDATE_LABEL_NUM',
+    UPDATE_LABEL_EXP: 'UPDATE_LABEL_EXP'
+
+};
