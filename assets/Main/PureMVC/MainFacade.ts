@@ -1,8 +1,11 @@
 import KYPureFacade from "../../KYCreatorSDK/DesignPatterns/KYPrueMVC/Core/KYPureFacade";
+import MainScene from "../MainScene";
 import TestButtonCommand from "./Command/TestButtonCommand";
 import CommandMap from "./Map/CommandMap";
 import LabelExpProxy from "./Proxy/LabelExpProxy";
+import MainSceneProxy from "./Proxy/MainSceneProxy";
 import TestButtonProxy from "./Proxy/TestButtonProxy";
+import TestLabelProxy from "./Proxy/TestLabelProxy";
 
 
 export default class MainFacade extends KYPureFacade {
@@ -26,8 +29,9 @@ export default class MainFacade extends KYPureFacade {
         this.registerCommand(CommandMap.UPDATE_EXP, TestButtonCommand);
         this.registerCommand(CommandMap.UPDATE_EXP_PROGRESS, TestButtonCommand);
     }
-
     initialProxy() {
+        this.registerProxy(new MainSceneProxy());
+        this.registerProxy(new TestLabelProxy());
         this.registerProxy(new TestButtonProxy());
         this.registerProxy(new LabelExpProxy());
 

@@ -6,14 +6,7 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class LabelLv extends cc.Component{
 
-
     start(){
-
-        KYPureFacade.getInstance('MainFacade').registerMediator(new LabelLvMediator(this))()
-
-
+        KYPureFacade.getInstance('MainFacade').registerMediator(new LabelLvMediator(this))
     }
-
-
-
 }

@@ -9,8 +9,6 @@ export default class TestButton extends cc.Component {
     @property(cc.Button)
     button: cc.Button = null;
 
-    // LIFE-CYCLE CALLBACKS:
-
     // onLoad () {}
 
     start() {

@@ -6,6 +6,7 @@ import NotificationMap from "../Map/NotificationMap";
 import LabelExpMediator from "../Mediator/LabelExpMediator";
 import LabelExpProxy from "../Proxy/LabelExpProxy";
 import TestButtonProxy from "../Proxy/TestButtonProxy";
+import TestLabelProxy from "../Proxy/TestLabelProxy";
 
 export default class TestButtonCommand extends SimpleCommand {
 
@@ -19,10 +20,12 @@ export default class TestButtonCommand extends SimpleCommand {
     public execute(notification: KYPureNotification): void {
 
         const testButtonProxy = <TestButtonProxy>this.getFacade().retrieveProxy(TestButtonProxy.NAME);
+        const testLabelProxy = <TestLabelProxy>this.getFacade().retrieveProxy(TestLabelProxy.NAME);
         const labelExpProxy = <LabelExpProxy>this.getFacade().retrieveProxy(LabelExpProxy.NAME);
         switch (notification.getName()) {
             case CommandMap.TEST_BUTTON_CLICK:
-                testButtonProxy.onTestButtonClick();
+                // testButtonProxy.onTestButtonClick();
+                testLabelProxy.onTestButtonClick()
                 break;
             case CommandMap.UPDATE_EXP:
 
@@ -30,6 +33,7 @@ export default class TestButtonCommand extends SimpleCommand {
                 
                 break;
             case CommandMap.TEST_LABEL_CLICK:
+
 
             break;
             default:
