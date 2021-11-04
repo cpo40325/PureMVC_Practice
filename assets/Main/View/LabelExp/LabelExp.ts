@@ -4,8 +4,7 @@ import KYPureFacade from "../../../KYCreatorSDK/DesignPatterns/KYPrueMVC/Core/KY
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class LabelExp extends cc.Label {
-
+export default class LabelExp extends cc.Component {
 
     start () {
         KYPureFacade.getInstance('MainFacade').registerMediator(new LabelExpMediator(this));

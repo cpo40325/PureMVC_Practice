@@ -2,13 +2,10 @@
 import KYPureMediator from "../../../KYCreatorSDK/DesignPatterns/KYPrueMVC/Mediator/KYPureMediator";
 import KYPureNotification from "../../../KYCreatorSDK/DesignPatterns/KYPrueMVC/Observer/KYPureNotification";
 import LabelExp from "../../View/LabelExp/LabelExp";
-import Player from "../../View/Player/Player";
-import TestButton from "../../View/TestButton/TestButton";
 import CommandMap from "../Map/CommandMap";
 import NotificationMap from "../Map/NotificationMap";
 
 export default class LabelExpMediator extends KYPureMediator {
-
 
     static NAME = 'LabelExp';
 
@@ -21,7 +18,8 @@ export default class LabelExpMediator extends KYPureMediator {
     }
 
     handleNotification(notification: KYPureNotification): void {
-        
+
+
         switch (notification.getName()) {
             case NotificationMap.UPDATE_LABEL_EXP:
                 this.updateExp(notification.getBody());
@@ -33,6 +31,11 @@ export default class LabelExpMediator extends KYPureMediator {
     }
 
     onRegister() {
+        this.getComponent().node.on('click', this.onClick, this);
+    }
+
+    onClick(button: cc.Button) {
+        console.log('LabelExp onClick');
 
     }
 
@@ -44,13 +47,12 @@ export default class LabelExpMediator extends KYPureMediator {
 
 
 
-    updateExp(exp:number) {
-       console.log('exp'+exp);
+    updateExp(exp: number) {
+        console.log('exp:' + exp);
 
-       this.getComponent().string = exp.toString();
+        this.getComponent().node.getComponent(cc.Label).string = 'exp: ' + exp.toString();
 
-    //    var a = this.getComponent() as unknown as cc.Label
-    //    a.string = exp.toString();
+        this.getFacade().sendNotification(CommandMap.UPDATE_EXP_PROGRESS, exp)
     }
 
 }

@@ -21,12 +21,11 @@ export default class MainScene extends cc.Component {
     starup() {
         this.node.addChild(cc.instantiate(this.buttonPrefab));
         this.node.addChild(cc.instantiate(this.labelPrefab));
- 
 
     }
 
 
-    // onLoad() { }
+    onLoad() { }
 
     start() {
         this.facade = new MainFacade();
@@ -40,11 +39,24 @@ export default class MainScene extends cc.Component {
 
         var player = this.getComponentInChildren('Player').node;
         var label = this.getComponentInChildren('TestLabel').node;
+
         if (this.getPlayerDistance(player, label) < player.width) {
             this.onPicked();
             this.facade.sendNotification(CommandMap.UPDATE_EXP);
+
             return;
         }
+
+        // this.getComponentsInChildren('TestLabel').forEach(label => {
+        
+        // if (this.getPlayerDistance(player, label.node) < player.width) {
+        //     this.onPicked();
+        //     this.facade.sendNotification(CommandMap.UPDATE_EXP);
+        //     return;
+        // }
+
+        // });
+        
 
 
     }

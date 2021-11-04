@@ -25,9 +25,13 @@ export default class TestButtonCommand extends SimpleCommand {
                 testButtonProxy.onTestButtonClick();
                 break;
             case CommandMap.UPDATE_EXP:
+
                 labelExpProxy.updateExp();
                 
                 break;
+            case CommandMap.TEST_LABEL_CLICK:
+
+            break;
             default:
                 break;
         }

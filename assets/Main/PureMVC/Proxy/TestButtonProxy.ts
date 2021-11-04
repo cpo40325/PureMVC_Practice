@@ -6,7 +6,6 @@ export default class TestButtonProxy extends KYPrueProxy {
 
     public static NAME = 'TestButtonProxy';
 
-    count = 0;
 
     public constructor() {
         super(TestButtonProxy.NAME, null);
@@ -14,8 +13,6 @@ export default class TestButtonProxy extends KYPrueProxy {
     }
 
     onTestButtonClick() {
-        this.count++;
-        this.getFacade().sendNotification(NotificationMap.UPDATE_LABEL_NUM, this.count);
 
     }
 }

@@ -24,6 +24,7 @@ export default class MainFacade extends KYPureFacade {
     initialCommand() {
         this.registerCommand(CommandMap.TEST_BUTTON_CLICK, TestButtonCommand);
         this.registerCommand(CommandMap.UPDATE_EXP, TestButtonCommand);
+        this.registerCommand(CommandMap.UPDATE_EXP_PROGRESS, TestButtonCommand);
     }
 
     initialProxy() {

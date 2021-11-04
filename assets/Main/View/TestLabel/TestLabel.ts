@@ -1,15 +1,10 @@
 import KYPureFacade from "../../../KYCreatorSDK/DesignPatterns/KYPrueMVC/Core/KYPureFacade";
 import MainScene from "../../MainScene";
-import TestLabelMediator from "../../PureMVC/Mediator/TestLabelMediator";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class TestLabel extends cc.Component {
-
-    @property(cc.Label)
-    label: cc.Label = null;
-
 
     /**
      * 方向
@@ -25,7 +20,6 @@ export default class TestLabel extends cc.Component {
     ySpeed = 10;
 
 
-
     timer: number = 0;
     dirTimer: number = 0;
     // dirDur: number = Math.floor(Math.random() * 10)
@@ -36,7 +30,10 @@ export default class TestLabel extends cc.Component {
     onLoad() { }
 
     start() {
-        KYPureFacade.getInstance('MainFacade').registerMediator(new TestLabelMediator(this));
+        var l = this.getComponent(cc.Label)
+        this.getComponent(cc.Label).string = 'o'
+
+        l.fontSize = 40
     }
 
 
