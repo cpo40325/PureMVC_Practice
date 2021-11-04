@@ -2,6 +2,7 @@
 import KYPureMediator from "../../../KYCreatorSDK/DesignPatterns/KYPrueMVC/Mediator/KYPureMediator";
 import KYPureNotification from "../../../KYCreatorSDK/DesignPatterns/KYPrueMVC/Observer/KYPureNotification";
 import Player from "../../View/Player/Player";
+import NotificationMap from "../Map/NotificationMap";
 
 export default class PlayerMediator extends KYPureMediator {
 
@@ -12,10 +13,18 @@ export default class PlayerMediator extends KYPureMediator {
     }
 
     listNotificationInterests(): string[] {
-        return [];
+        return [NotificationMap.PLAYER_UPGRADE];
     }
 
     handleNotification(notification: KYPureNotification): void {
+
+        switch(notification.getName()){
+            case NotificationMap.PLAYER_UPGRADE:
+            this.playerUpgrade()
+            break
+
+
+        }
 
     }
     onClick(button: cc.Button) {
@@ -46,5 +55,10 @@ export default class PlayerMediator extends KYPureMediator {
 
 
 
-
+    playerUpgrade() {
+        this.getComponent().node.width *= 1.5
+        this.getComponent().node.height *= 1.5
+    }
 }
+
+

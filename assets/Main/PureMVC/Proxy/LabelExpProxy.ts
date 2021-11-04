@@ -22,6 +22,8 @@ export default class LabelExpProxy extends KYPrueProxy {
             this.exp = 0
             this.lv ++
             this.getFacade().sendNotification(NotificationMap.UPDATE_LABEL_LV, this.lv)
+            this.getFacade().sendNotification(NotificationMap.PLAYER_UPGRADE)
+
         }
         this.getFacade().sendNotification(NotificationMap.UPDATE_LABEL_EXP, this.exp)
 

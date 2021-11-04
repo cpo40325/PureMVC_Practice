@@ -1,5 +1,7 @@
 import KYPureFacade from "../../../KYCreatorSDK/DesignPatterns/KYPrueMVC/Core/KYPureFacade";
 import MainScene from "../../MainScene";
+import CommandMap from "../../PureMVC/Map/CommandMap";
+import Player from "../Player/Player";
 
 const { ccclass, property } = cc._decorator;
 
@@ -13,11 +15,15 @@ export default class TestLabel extends cc.Component {
      * 3-> (-,-)
      * 0-> (-,+)
      */
+
     dir = Math.floor(Math.random() * 4);
 
+
+    hp = 1
+
     //速度
-    xSpeed = 10;
-    ySpeed = 10;
+    xSpeed = 1;
+    ySpeed = 1;
 
 
     timer: number = 0;
@@ -25,40 +31,76 @@ export default class TestLabel extends cc.Component {
     // dirDur: number = Math.floor(Math.random() * 10)
     dirDur: number = 3;
 
-    // LIFE-CYCLE CALLBACKS:
-
-    onLoad() { }
 
     start() {
+        cc.director.getCollisionManager().enabled = true;
         var l = this.getComponent(cc.Label)
         this.getComponent(cc.Label).string = 'o'
 
-        l.fontSize = 40
+
+        this.node.on('click', this.onClick, this)
+
+
+
+        //拖曳
+        this.node.on(cc.Node.EventType.TOUCH_MOVE, function (event) {
+
+            var delta = event.touch.getDelta()
+            this.x += delta.x
+            this.y += delta.y
+
+        }, this.node)
+
+
     }
 
 
+    onClick() {
+        this.underAttack()
+    }
+
+
+    onCollisionEnter(other: cc.Component, self: cc.Component) {
+
+
+        if (other.name.search(TestLabel.name) != -1) {
+            return
+        }
+        this.hp--
+
+        if (this.hp == 0) {
+            this.dead()
+        }else{
+            this.getDir()
+            this.xSpeed++
+            this.ySpeed++
+        }
+
+    }
     update(dt) {
-        this.getDir();
+
+
+        if (this.dirTimer >= this.dirDur) {
+            this.getDir();
+        }
         this.move(dt);
 
         this.dirTimer += dt;
+
     }
-// 1,3
-// 2,0
+    // 1,3
+    // 2,0
 
 
 
     //決定方向
     getDir() {
-
-        if (this.dirTimer >= this.dirDur) {
-            while(true){
-                var n = Math.floor(Math.random() * 4);
-                if ((n + this.dir)/2 != 0) {
-                    this.dir = n;
-                    this.dirTimer = 0
-                    break;
-                }
+        while (true) {
+            var n = Math.floor(Math.random() * 4);
+            if ((n + this.dir) / 2 != 0) {
+                this.dir = n;
+                this.dirTimer = 0
+                break;
             }
         }
     }
@@ -73,8 +115,8 @@ export default class TestLabel extends cc.Component {
         var b1 = Math.random();
         var b2 = Math.random();
 
-        var sX = this.xSpeed * dt * b1 + b2;
-        var sY = this.ySpeed * dt * b2 + b1;
+        var sX = this.xSpeed * dt + b1;
+        var sY = this.ySpeed * dt + b2;
         switch (this.dir) {
             case 1:
                 x += sX;
@@ -118,7 +160,21 @@ export default class TestLabel extends cc.Component {
 
 
     }
+    underAttack() {
+        this.hp--
 
+        console.log('hp: ' + this.hp);
+        if (this.hp == 0) {
+            this.dead()
+        }
+
+    }
+
+    dead(){
+        console.log('dead');
+        this.getComponent(TestLabel.name).node.destroy();
+        KYPureFacade.getInstance('MainFacade').sendNotification(CommandMap.UPDATE_EXP);
+    }
 
 
 }

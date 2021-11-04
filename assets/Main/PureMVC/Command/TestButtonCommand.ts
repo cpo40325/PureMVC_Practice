@@ -1,6 +1,5 @@
 import SimpleCommand from "../../../KYCreatorSDK/DesignPatterns/KYPrueMVC/Command/SimpleCommand";
 import KYPureNotification from "../../../KYCreatorSDK/DesignPatterns/KYPrueMVC/Observer/KYPureNotification";
-import LabelExp from "../../View/LabelExp/LabelExp";
 import CommandMap from "../Map/CommandMap";
 import NotificationMap from "../Map/NotificationMap";
 import LabelExpMediator from "../Mediator/LabelExpMediator";

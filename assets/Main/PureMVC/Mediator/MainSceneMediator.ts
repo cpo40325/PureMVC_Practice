@@ -6,7 +6,7 @@ import NotificationMap from "../Map/NotificationMap";
 
 export default class MainSceneMediator extends KYPureMediator {
 
-    static NAME = 'LabelLvMediator';
+    static NAME = 'MainSceneMediator';
 
     constructor(viewComponent: any) {
         super(MainSceneMediator.NAME, viewComponent);

@@ -95,8 +95,13 @@ export default class Player extends cc.Component {
     }
     start() {
         KYPureFacade.getInstance('MainFacade').registerMediator(new PlayerMediator(this));
+        cc.director.getCollisionManager().enabled = true;
     }
 
+    onCollisionEnter(){
+        console.log('player onCollisionEnter');
+        
+    }
 
 
 

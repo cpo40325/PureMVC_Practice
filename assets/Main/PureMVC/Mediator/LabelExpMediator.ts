@@ -19,9 +19,10 @@ export default class LabelExpMediator extends KYPureMediator {
 
     handleNotification(notification: KYPureNotification): void {
 
-
         switch (notification.getName()) {
+
             case NotificationMap.UPDATE_LABEL_EXP:
+
                 this.updateExp(notification.getBody());
                 break;
 

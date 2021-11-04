@@ -9,15 +9,16 @@ export default class LabelLvMediator extends KYPureMediator {
     static NAME = 'LabelLvMediator';
 
     constructor(viewComponent: any) {
+        
         super(LabelLvMediator.NAME, viewComponent);
     }
 
     listNotificationInterests(): string[] {
+        
         return [NotificationMap.UPDATE_LABEL_LV];
     }
 
     handleNotification(notification: KYPureNotification): void {
-        console.log('LabelLvMediator handleNotification');
         switch (notification.getName()) {
             case NotificationMap.UPDATE_LABEL_LV:
                 this.updateView(notification.getBody())
@@ -39,7 +40,6 @@ export default class LabelLvMediator extends KYPureMediator {
     onClick(button: cc.Button) {
 
         console.log('LabelLvMediator click');
-
 
     }
     onRegister() {
