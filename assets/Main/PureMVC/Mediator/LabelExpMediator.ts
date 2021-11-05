@@ -7,7 +7,7 @@ import NotificationMap from "../Map/NotificationMap";
 
 export default class LabelExpMediator extends KYPureMediator {
 
-    static NAME = 'LabelExp';
+    static NAME = 'LabelExpMediator';
 
     constructor(viewComponent: any) {
         super(LabelExpMediator.NAME, viewComponent);

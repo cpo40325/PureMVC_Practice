@@ -16,14 +16,18 @@ export default class TestLabel extends cc.Component {
      * 0-> (-,+)
      */
 
+
+    height = 18
+    width = 18
+
     dir = Math.floor(Math.random() * 4);
 
 
     hp = 1
 
     //速度
-    xSpeed = 1;
-    ySpeed = 1;
+    xSpeed = 5;
+    ySpeed = 5;
 
 
     timer: number = 0;
@@ -63,18 +67,22 @@ export default class TestLabel extends cc.Component {
     onCollisionEnter(other: cc.Component, self: cc.Component) {
 
 
-        if (other.name.search(TestLabel.name) != -1) {
-            return
-        }
-        this.hp--
+        //相同則return
+        // if (other.name.search(TestLabel.name) != -1) {
+        //     return
+        // }
 
-        if (this.hp == 0) {
-            this.dead()
-        }else{
-            this.getDir()
-            this.xSpeed++
-            this.ySpeed++
+
+        if (other.name.search(TestLabel.name) != -1) {
+     
+        } else {
+            this.hp--
+            if (this.hp == 0) {
+                this.dead()
+            }
         }
+        this.getDir()
+
 
     }
     update(dt) {
@@ -83,9 +91,13 @@ export default class TestLabel extends cc.Component {
         if (this.dirTimer >= this.dirDur) {
             this.getDir();
         }
-        this.move(dt);
+        if (this.timer >= 0.1) {
+            this.move(dt);
+            this.timer = 0
+        }
 
         this.dirTimer += dt;
+        this.timer += dt
 
     }
     // 1,3
@@ -112,11 +124,19 @@ export default class TestLabel extends cc.Component {
         var y = 0;
 
 
-        var b1 = Math.random();
-        var b2 = Math.random();
+        var b1 = Math.random() * 2;
+        var b2 = Math.random() * 2;
 
-        var sX = this.xSpeed * dt + b1;
-        var sY = this.ySpeed * dt + b2;
+
+
+
+
+        this.collision();
+
+        var sX = this.xSpeed * dt +b1;
+        var sY = this.ySpeed * dt +b2;
+        // var sX = b1;
+        // var sY = b2;
         switch (this.dir) {
             case 1:
                 x += sX;
@@ -160,6 +180,46 @@ export default class TestLabel extends cc.Component {
 
 
     }
+
+    sceneX = 480
+    sceneY = 320
+
+
+    private collision() {
+        if (this.node.x >= this.sceneX - this.width) {
+            // this.xSpeed *=-1
+            if (this.dir == 1) {
+                this.dir = 3;
+            } else if (this.dir == 2) {
+                this.dir = 0;
+            }
+        }
+        if (this.node.x <= -this.sceneX + this.width) {
+            // this.xSpeed *=-1
+            if (this.dir == 3) {
+                this.dir = 1;
+            } else if (this.dir == 0) {
+                this.dir = 2;
+            }
+        }
+        if (this.node.y >= this.sceneY - this.height) {
+            // this.ySpeed *=-1
+            if (this.dir == 1) {
+                this.dir = 3;
+            } else if (this.dir == 0) {
+                this.dir = 2;
+            }
+        }
+        if (this.node.y <= -this.sceneY + this.height) {
+            // this.ySpeed *=-1
+            if (this.dir == 2) {
+                this.dir = 0;
+            } else if (this.dir == 3) {
+                this.dir = 1;
+            }
+        }
+    }
+
     underAttack() {
         this.hp--
 

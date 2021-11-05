@@ -31,6 +31,8 @@ export default class MainScene extends cc.Component {
     }
 
 
+
+
     addLabel() {
 
         // 使用给定的模板在场景中生成一个新节点
@@ -38,47 +40,16 @@ export default class MainScene extends cc.Component {
         // 将新增的节点添加到 Canvas 节点下面
         this.node.addChild(newLabel);
         // 为星星设置一个随机位置
-        newLabel.setPosition(0, 0);
-        // newLabel.getComponent('Star').game = this;
+
+        var x = 480 - Math.floor(Math.random()* 960)
+        var y = 320 - Math.floor(Math.random()* 640)
+
+        newLabel.setPosition(x,y)
+        console.log(x+' , '+y);
+        
     }
 
 
-
-
-
-    // onPicked() {
-    //     // 然后销毁当前星星节点
-    //     this.getComponentInChildren(TestLabel.name).node.destroy();
-    // }
-
-    // getPlayerDistance(nodeA, nodeB) {
-    //     // 根据 Player 节点位置判断距离
-    //     var playerPos = nodeA.getPosition();
-    //     // 根据两点位置计算两点之间距离
-    //     var dist = nodeB.position.sub(playerPos).mag();
-    //     return dist;
-    // }
-
-       // collision(){
-    //     var label = this.getComponentInChildren(TestLabel.name)
- 
-
-    //     if (label == null || this.player == null) {
-            
-    //         console.log('collision null');
-            
-    //         return
-    //     }
-
-
-        
-
-    //     if (this.getPlayerDistance(this.player.node, label.node) < this.player.node.width) {
-    //         this.onPicked();
-    //         this.facade.sendNotification(CommandMap.UPDATE_EXP);
-    //     }
-
-    // }
 
 
 

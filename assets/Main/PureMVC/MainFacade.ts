@@ -2,6 +2,7 @@ import KYPureFacade from "../../KYCreatorSDK/DesignPatterns/KYPrueMVC/Core/KYPur
 import MainScene from "../MainScene";
 import TestButtonCommand from "./Command/TestButtonCommand";
 import CommandMap from "./Map/CommandMap";
+import EnemyProxy from "./Proxy/EnemyProxy";
 import LabelExpProxy from "./Proxy/LabelExpProxy";
 import MainSceneProxy from "./Proxy/MainSceneProxy";
 import TestButtonProxy from "./Proxy/TestButtonProxy";
@@ -34,6 +35,7 @@ export default class MainFacade extends KYPureFacade {
         this.registerProxy(new TestLabelProxy());
         this.registerProxy(new TestButtonProxy());
         this.registerProxy(new LabelExpProxy());
+        this.registerProxy(new EnemyProxy());
 
     }
 

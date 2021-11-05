@@ -99,13 +99,26 @@ export default class Player extends cc.Component {
     }
 
     onCollisionEnter(){
+        
         console.log('player onCollisionEnter');
         
     }
 
 
 
+
     update(dt) {
+        // var bgX= this.node.getParent().position.x
+        // var bgY= this.node.getParent().position.y
+        
+        // var maxX = bgX + cc.winSize.width/2
+        // var minX = bgX - cc.winSize.width/2
+        // var maxY = bgY + cc.winSize.height/2
+        // var minY = bgY - cc.winSize.height/2
+
+        
+
+
         // 根据当前加速度方向每帧更新速度
         if (this.accLeft) {
             this.xSpeed -= this.accel * dt;
@@ -128,6 +141,13 @@ export default class Player extends cc.Component {
         if (Math.abs(this.ySpeed) > this.maxMoveSpeed) {
             // if speed reach limit, use max speed with current direction
             this.ySpeed = this.maxMoveSpeed * this.ySpeed / Math.abs(this.ySpeed);
+        }
+
+        if (this.node.x >= 460 || this.node.x <= -460) {
+            this.xSpeed *=-1
+        }
+        if (this.node.y >= 300 || this.node.y <= -300) {
+            this.ySpeed *=-1
         }
         // 根据当前速度更新主角的位置
         this.node.x += this.xSpeed * dt;
