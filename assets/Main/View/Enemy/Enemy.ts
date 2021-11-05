@@ -3,7 +3,7 @@ import KYPureFacade from "../../../KYCreatorSDK/DesignPatterns/KYPrueMVC/Core/KY
 import MainScene from "../../MainScene";
 import TestLabel from "../TestLabel/TestLabel";
 
-const {ccclass, property} = cc._decorator;
+const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class Enemy extends cc.Component {
@@ -16,44 +16,56 @@ export default class Enemy extends cc.Component {
     accLeft = false;
     accRight = false;
     accel = 5
-    maxMoveSpeed = 20;
+    maxMoveSpeed = 200;
 
-    start () {
+    start() {
 
 
         KYPureFacade.getInstance('MainFacade').registerMediator(new EnemyMediator(this));
         cc.director.getCollisionManager().enabled = true;
-    
-            // 加速度方向开关
-            this.accLeft = false;
-            this.accRight = false;
-            this.accTop = false;
-            this.accDown = true;
-            // 主角当前水平方向速度
-            this.xSpeed = Math.floor(Math.random()*3);
-            this.ySpeed = Math.floor(Math.random()*3);
+
+        // 加速度方向开关
+        this.accLeft = false;
+        this.accRight = false;
+        this.accTop = false;
+        this.accDown = false;
+        // 主角当前水平方向速度
+        this.xSpeed = Math.floor(Math.random() * this.maxMoveSpeed);
+        this.ySpeed = Math.floor(Math.random() * this.maxMoveSpeed);
     }
 
-    onCollisionEnter(){
-        
-        console.log('Enemy onCollisionEnter');
-        
+    onCollisionEnter(other: cc.Component, self: cc.Component) {
+
+
+        this.accel += 10
+        this.xSpeed *= -1
+        this.ySpeed *= -1
+
     }
 
-    find(){
-        
+    find() {
+
         var food = this.node.parent.getChildByName('TestLabel')
 
         if (food == null) {
             return
         }
-        
-        console.log(food.x,food.y);
-        
+
+        console.log(food.x, food.y);
+
     }
 
+    dirTime = 0
     update(dt) {
-        this.find()
+        // this.find()
+
+
+
+
+
+        // this.getDir();
+
+
 
         if (this.accLeft) {
             this.xSpeed -= this.accel * dt;
@@ -61,7 +73,7 @@ export default class Enemy extends cc.Component {
         else if (this.accRight) {
             this.xSpeed += this.accel * dt;
         }
-         if (this.accDown) {
+        if (this.accDown) {
             this.ySpeed -= this.accel * dt;
         }
         else if (this.accTop) {
@@ -79,13 +91,45 @@ export default class Enemy extends cc.Component {
         }
 
         if (this.node.x >= 460 || this.node.x <= -460) {
-            this.xSpeed *=-1
+            this.xSpeed *= -1
         }
         if (this.node.y >= 300 || this.node.y <= -300) {
-            this.ySpeed *=-1
+            this.ySpeed *= -1
         }
         // 根据当前速度更新主角的位置
         this.node.x += this.xSpeed * dt;
         this.node.y += this.ySpeed * dt;
+
+        this.dirTime += dt
+    }
+
+
+    private getDir() {
+        if (this.dirTime > 0.4) {
+
+            this.accDown = false;
+            this.accTop = false;
+            this.accLeft = false;
+            this.accRight = false;
+
+            switch (Math.floor(Math.random() * 4)) {
+
+                case 0:
+                    this.accRight = true;
+                    break;
+                case 1:
+                    this.accDown = true;
+                    break;
+                case 2:
+                    this.accLeft = true;
+                    break;
+                case 3:
+                    this.accTop = true;
+                    break;
+
+
+            }
+            this.dirTime = 0;
+        }
     }
 }
