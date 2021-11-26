@@ -6,7 +6,7 @@ import Player from "../Player/Player";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class TestLabel extends cc.Component {
+export default class Food extends cc.Component {
 
     /**
      * 方向
@@ -68,12 +68,12 @@ export default class TestLabel extends cc.Component {
 
 
         //相同則return
-        // if (other.name.search(TestLabel.name) != -1) {
+        // if (other.name.search(Food.name) != -1) {
         //     return
         // }
 
 
-        if (other.name.search(TestLabel.name) != -1) {
+        if (other.name.search(Food.name) != -1) {
      
         } else {
             this.hp--
@@ -232,7 +232,7 @@ export default class TestLabel extends cc.Component {
 
     dead(){
         console.log('dead');
-        this.getComponent(TestLabel.name).node.destroy();
+        this.getComponent(Food.name).node.destroy();
         KYPureFacade.getInstance('MainFacade').sendNotification(CommandMap.UPDATE_EXP);
     }
 

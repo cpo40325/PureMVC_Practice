@@ -2,16 +2,16 @@ import KYPrueProxy from "../../../KYCreatorSDK/DesignPatterns/KYPrueMVC/Proxy/KY
 import NotificationMap from "../Map/NotificationMap";
 
 
-export default class TestLabelProxy extends KYPrueProxy {
+export default class FoodlProxy extends KYPrueProxy {
 
-    public static NAME = 'TestLabelProxy';
+    public static NAME = 'FoodProxy';
 
 
     labelCount = 1
 
 
     public constructor() {
-        super(TestLabelProxy.NAME, null);
+        super(FoodlProxy.NAME, null);
 
     }
 

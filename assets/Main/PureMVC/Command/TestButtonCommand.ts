@@ -3,9 +3,9 @@ import KYPureNotification from "../../../KYCreatorSDK/DesignPatterns/KYPrueMVC/O
 import CommandMap from "../Map/CommandMap";
 import NotificationMap from "../Map/NotificationMap";
 import LabelExpMediator from "../Mediator/LabelExpMediator";
+import FoodlProxy from "../Proxy/FoodProxy";
 import LabelExpProxy from "../Proxy/LabelExpProxy";
 import TestButtonProxy from "../Proxy/TestButtonProxy";
-import TestLabelProxy from "../Proxy/TestLabelProxy";
 
 export default class TestButtonCommand extends SimpleCommand {
 
@@ -19,12 +19,12 @@ export default class TestButtonCommand extends SimpleCommand {
     public execute(notification: KYPureNotification): void {
 
         const testButtonProxy = <TestButtonProxy>this.getFacade().retrieveProxy(TestButtonProxy.NAME);
-        const testLabelProxy = <TestLabelProxy>this.getFacade().retrieveProxy(TestLabelProxy.NAME);
+        const foodlProxy = <FoodlProxy>this.getFacade().retrieveProxy(FoodlProxy.NAME);
         const labelExpProxy = <LabelExpProxy>this.getFacade().retrieveProxy(LabelExpProxy.NAME);
         switch (notification.getName()) {
             case CommandMap.TEST_BUTTON_CLICK:
                 // testButtonProxy.onTestButtonClick();
-                testLabelProxy.onTestButtonClick()
+                foodlProxy.onTestButtonClick()
                 break;
             case CommandMap.UPDATE_EXP:
 

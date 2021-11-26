@@ -3,7 +3,6 @@ import CommandMap from "./PureMVC/Map/CommandMap";
 import MainSceneMediator from "./PureMVC/Mediator/MainSceneMediator";
 import PlayerMediator from "./PureMVC/Mediator/PlayerMediator";
 import Player from "./View/Player/Player";
-import TestLabel from "./View/TestLabel/TestLabel";
 
 const { ccclass, property } = cc._decorator;
 

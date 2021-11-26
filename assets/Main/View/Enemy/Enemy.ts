@@ -1,7 +1,6 @@
 import EnemyMediator from "../../PureMVC/Mediator/EnemyMediator";
 import KYPureFacade from "../../../KYCreatorSDK/DesignPatterns/KYPrueMVC/Core/KYPureFacade";
 import MainScene from "../../MainScene";
-import TestLabel from "../TestLabel/TestLabel";
 
 const { ccclass, property } = cc._decorator;
 
@@ -37,6 +36,9 @@ export default class Enemy extends cc.Component {
     onCollisionEnter(other: cc.Component, self: cc.Component) {
 
 
+
+
+
         this.accel += 10
         this.xSpeed *= -1
         this.ySpeed *= -1
@@ -45,7 +47,7 @@ export default class Enemy extends cc.Component {
 
     find() {
 
-        var food = this.node.parent.getChildByName('TestLabel')
+        var food = this.node.parent.getChildByName('Food')
 
         if (food == null) {
             return
@@ -57,16 +59,32 @@ export default class Enemy extends cc.Component {
 
     dirTime = 0
     update(dt) {
-        // this.find()
+
+        this.dirTime += dt;
 
 
+        
+        if(this.dirTime > 2){
+
+            const node = this.node.getParent().getChildByName("Food");
 
 
+            if(node!= null){
+                let action = cc.tween(this.node).to(1, { position: cc.v3(node.getPosition())});
+    
+                action.start();
+                this.dirTime = 0;
+        
+        
+            }
+         
+        }
 
-        // this.getDir();
+
+    }
 
 
-
+    private oldMove(dt: any) {
         if (this.accLeft) {
             this.xSpeed -= this.accel * dt;
         }
@@ -91,18 +109,17 @@ export default class Enemy extends cc.Component {
         }
 
         if (this.node.x >= 460 || this.node.x <= -460) {
-            this.xSpeed *= -1
+            this.xSpeed *= -1;
         }
         if (this.node.y >= 300 || this.node.y <= -300) {
-            this.ySpeed *= -1
+            this.ySpeed *= -1;
         }
         // 根据当前速度更新主角的位置
         this.node.x += this.xSpeed * dt;
         this.node.y += this.ySpeed * dt;
 
-        this.dirTime += dt
+        this.dirTime += dt;
     }
-
 
     private getDir() {
         if (this.dirTime > 0.4) {

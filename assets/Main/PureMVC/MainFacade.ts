@@ -3,10 +3,10 @@ import MainScene from "../MainScene";
 import TestButtonCommand from "./Command/TestButtonCommand";
 import CommandMap from "./Map/CommandMap";
 import EnemyProxy from "./Proxy/EnemyProxy";
+import FoodlProxy from "./Proxy/FoodProxy";
 import LabelExpProxy from "./Proxy/LabelExpProxy";
 import MainSceneProxy from "./Proxy/MainSceneProxy";
 import TestButtonProxy from "./Proxy/TestButtonProxy";
-import TestLabelProxy from "./Proxy/TestLabelProxy";
 
 
 export default class MainFacade extends KYPureFacade {
@@ -32,7 +32,7 @@ export default class MainFacade extends KYPureFacade {
     }
     initialProxy() {
         this.registerProxy(new MainSceneProxy());
-        this.registerProxy(new TestLabelProxy());
+        this.registerProxy(new FoodlProxy());
         this.registerProxy(new TestButtonProxy());
         this.registerProxy(new LabelExpProxy());
         this.registerProxy(new EnemyProxy());
